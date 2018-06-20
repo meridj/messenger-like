@@ -6,7 +6,6 @@ var join = require('path').join;
 var Server = require('http').Server;
 var socket = require('socket.io');
 
-
 /*
  * Vars
  */
@@ -16,7 +15,6 @@ var io = socket(server);
 
 var indexPath = join(__dirname, '..', '/dist/index.html');
 var assetsPath = join(__dirname, '..', 'dist');
-
 
 /*
  * Express
@@ -29,7 +27,6 @@ app.get('/', function(req, res) {
   res.sendFile(indexPath);
 });
 
-
 /*
  * Socket.io
  */
@@ -40,7 +37,6 @@ io.on('connection', function(socket) {
     io.emit('chat message', message);
   });
 });
-
 
 /*
  * Server
