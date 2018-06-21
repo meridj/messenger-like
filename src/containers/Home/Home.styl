@@ -1,1 +1,27 @@
-h1 { display: 'flex' }
+@import '~/styles/charts'
+
+.home
+    height: 100vh
+    display: flex
+    flex-direction: column
+    justify-content: space-around
+    align-items: center
+    background-image: $homeBackgroundColor
+
+    &-title
+        padding: 0 10rem
+        font-weight: $fontLight
+        color: $lightFontColor
+        font-size: 4em
+        line-height: 1.5em
+        text-align: center
+
+    &-link
+        background-color: $linkBackgroundColor
+        font-weight: $fontBold
+        padding: 1rem 4rem
+        border-radius: 25px
+        transition: 0.3s
+        &:hover
+            border-radius: 3px
+            box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
