@@ -12,9 +12,14 @@ import { Link } from 'react-router-dom';
  * @param {string} to - new destination to go
  * @param {node} children - name of the react-router link
  * @param {string} className - className to apply style on link
+ * @param {function} onMouseHovered - function to toggle hovering event
  */
-const ButtonNavigation = ({ to, children, className }) => (
-  <Link to={to} className={className}>
+const ButtonNavigation = ({ to, children, className, onButtonHovered }) => (
+  <Link
+    onMouseEnter={onButtonHovered}
+    onMouseLeave={onButtonHovered}
+    to={to}
+    className={className}>
     {children}
   </Link>
 );
@@ -22,7 +27,8 @@ const ButtonNavigation = ({ to, children, className }) => (
 ButtonNavigation.propTypes = {
   to: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
+  onButtonHovered: PropTypes.func
 };
 
 export default ButtonNavigation;
