@@ -6,7 +6,7 @@ import React from 'react';
 /*
 ** Local imports
 */
-import { Form, Title } from '../';
+import { Form, Title, MessageList } from '../';
 
 import { fields } from '../../datas/';
 
@@ -23,11 +23,10 @@ const Chat = () => {
       <Title className="chat-title" balise="h1">
         Your Chatroom
       </Title>
+      <MessageList />
       <Form className="form-message" fieldConfig={fields.message} />
     </div>
   );
 };
-
-Chat.propTypes = {};
 
 export default Chat;

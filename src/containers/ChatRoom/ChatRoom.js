@@ -14,7 +14,6 @@ import './ChatRoom.styl';
 /**
  * Class component
  * Entry point of the chat fonctionnalities
- * Launch socket.io when is mounting
  * @param - no
  */
 class ChatRoom extends React.Component {
