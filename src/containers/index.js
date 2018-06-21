@@ -1,6 +1,8 @@
 /**
  * Local imports
  */
-import App from './App/App';
+import ChatRoom from './ChatRoom/ChatRoom';
+import Home from './Home/Home';
+import Root from './Root/Root';
 
-export { App };
+export { ChatRoom, Home, Root };
