@@ -6,6 +6,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 /**
+ * Local imports
+ */
+import './ButtonNavigation.styl';
+
+/**
  * Functional component
  * Create a generic Button to navigate around the app
  * with react-router library

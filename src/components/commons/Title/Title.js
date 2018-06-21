@@ -5,6 +5,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
+ * Local imports
+ */
+import './Title.styl';
+
+/**
  * Functional component
  * Render a title synchronized with the balise prop
  * @param {node} children - content to render as a title
