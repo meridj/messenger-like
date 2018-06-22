@@ -15,20 +15,23 @@ import './Field.styl';
  * @param {string} type - specific type for input
  * @param {string} className - specific className to apply style
  */
-const Field = ({ placeholder, type, className }) => {
-  const field =
-    type === 'textarea' ? (
-      <textarea className={className} placeholder={placeholder} />
-    ) : (
-      <input className={className} placeholder={placeholder} type={type} />
-    );
-
-  return field;
+const Field = ({ placeholder, type, className, onChange, value }) => {
+  return (
+    <input
+      onChange={onChange}
+      value={value}
+      className={className}
+      placeholder={placeholder}
+      type={type}
+    />
+  );
 };
 
 Field.propTypes = {
   placeholder: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
   className: PropTypes.string
 };
 

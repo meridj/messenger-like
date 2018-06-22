@@ -2,7 +2,9 @@
 ** Npm imports
 */
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import * as actions from '../../actions/';
 
 /**
  * Local imports
@@ -12,16 +14,41 @@ import { Field } from '../';
 import './Form.styl';
 
 /**
- * Functional component
+ * Class component
+ *
  * @param {string} className - className to apply specific style
+ * @param {object} fieldConfig - congig object for input form
+ * @param {function} changeMessageInputValue - function for add new value to redux state
+ * @param {string} formMessageValue - Redux value for input
  */
-const Form = ({ className, fieldConfig }) => {
-  return (
-    <form className={className}>
-      <Field {...fieldConfig} />
-    </form>
-  );
-};
+class Form extends React.Component {
+  handleChange = evt => {
+    const { value } = evt.target;
+
+    this.props.changeMessageInputValue(value);
+  };
+
+  handleSubmit = evt => {
+    const currentValue = this.props.formMessageValue;
+
+    evt.preventDefault();
+    this.props.sendMessage(currentValue);
+  };
+
+  render() {
+    const { className, fieldConfig, formMessageValue } = this.props;
+
+    return (
+      <form onSubmit={this.handleSubmit} className={className}>
+        <Field
+          onChange={this.handleChange}
+          value={formMessageValue}
+          {...fieldConfig}
+        />
+      </form>
+    );
+  }
+}
 
 Form.propTypes = {
   className: PropTypes.string,
@@ -29,7 +56,16 @@ Form.propTypes = {
     type: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     className: PropTypes.string
-  }).isRequired
+  }).isRequired,
+  formMessageValue: PropTypes.string.isRequired,
+  changeMessageInputValue: PropTypes.func.isRequired
 };
 
-export default Form;
+const mapStateToProps = ({ formMessageValue }) => {
+  return { formMessageValue };
+};
+
+export default connect(
+  mapStateToProps,
+  actions
+)(Form);

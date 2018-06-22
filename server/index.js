@@ -17,7 +17,10 @@ var io = socket(server);
  */
 let id = 0;
 io.on('connection', function(socket) {
-  console.log('connect');
+  // test
+  console.log('CONNECTED');
+  //io.emit('chat message', { id: id, messageValue: 'Wesh meridj!' });
+
   socket.on('chat message', function(message) {
     message.id = ++id;
     io.emit('chat message', message);

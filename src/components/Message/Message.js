@@ -11,10 +11,15 @@ import './Message.styl';
 
 /**
  * Functional component
- * @param {} - no
+ *
+ * @param {string} messageValue
  */
-const Message = () => <li className="message">Hey salut mec !</li>;
+const Message = ({ messageValue }) => (
+  <li className="message">{messageValue}</li>
+);
 
-Message.propTypes = {};
+Message.propTypes = {
+  messageValue: PropTypes.string.isRequired
+};
 
 export default Message;

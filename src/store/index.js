@@ -1,12 +1,39 @@
 /**
  * Npm imports
  */
-import { createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { socketMiddleware } from '../middlewares/';
 
 /**
- * Code
+ * Local imports
  */
-const store = createStore(() => {}, composeWithDevTools());
+import reducers from '../reducers/';
+
+/**
+ * Extension redux dev tools
+ */
+let devTools = [];
+
+if (window.devToolsExtension) {
+  devTools = [window.devToolsExtension()];
+}
+
+/**
+ * Middlewares custom
+ */
+const appliedSocketMiddleware = applyMiddleware(socketMiddleware);
+
+/**
+ * Enhancers : les extensions/outils + les middlewares custom
+ */
+const enhancers = compose(
+  appliedSocketMiddleware,
+  ...devTools
+);
+
+/**
+ * Store, configuré avec le reducer et les "enhancers"
+ */
+const store = createStore(reducers, enhancers);
 
 export default store;

@@ -2,12 +2,15 @@
 ** Npm imports
 */
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 /**
  * Local imports
  */
 import { Home, ChatRoom } from '~/containers/';
+
+import store from '../../store/';
 
 import '~/styles/reset.css';
 import '~/styles/index.styl';
@@ -22,14 +25,16 @@ import '~/styles/index.styl';
  * @param - no
  */
 const Root = () => {
-  // TODO: dynamiser les routes
+  // TODO: dynamiser les routecomposeWithDevTools()s
   return (
-    <Router>
-      <React.Fragment>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/chatroom" component={ChatRoom} />
-      </React.Fragment>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/chatroom" component={ChatRoom} />
+        </Switch>
+      </Router>
+    </Provider>
   );
 };
 

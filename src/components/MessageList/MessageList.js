@@ -2,6 +2,7 @@
 ** Npm imports
 */
 import React from 'react';
+import { connect } from 'react-redux';
 
 /*
 ** Local imports
@@ -10,40 +11,19 @@ import { Message } from '../';
 
 import './MessageList.styl';
 
-const MessageList = () => {
+const MessageList = ({ messages }) => {
   return (
     <ul className="message-list">
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      {/*<Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />*/}
+      {messages.map(message => <Message key={message.id} {...message} />)}
     </ul>
   );
 };
 
-export default MessageList;
+const mapStateToProps = ({ message }) => {
+  return { messages: message };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(MessageList);
