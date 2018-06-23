@@ -29,7 +29,7 @@ const Message = ({ username, user: myUsername, messageValue }) => {
 
   return (
     <li style={messageStyle.messageWrapper} className="message">
-      <span className="message-username">{username}</span>
+      <span className="message-username">{isMe ? 'moi' : username}</span>
       <span style={messageStyle.messageText} className="message-text">
         {messageValue}
       </span>

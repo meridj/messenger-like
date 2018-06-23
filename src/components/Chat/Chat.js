@@ -25,6 +25,10 @@ class Chat extends React.Component {
     this.props.changeUsernameInputValue(value);
   };
 
+  handleBlurInput = () => {
+    if (!this.props.user.length) this.props.setUsernameToInitialState();
+  };
+
   render() {
     const { user } = this.props;
 
@@ -34,6 +38,7 @@ class Chat extends React.Component {
           Welcome in your Chatroom :{' '}
           <Field
             value={user}
+            onBlur={this.handleBlurInput}
             onChange={this.handleChangeUsernameInputValue}
             {...fields.username}
           />

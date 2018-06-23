@@ -15,9 +15,10 @@ import './Field.styl';
  * @param {string} type - specific type for input
  * @param {string} className - specific className to apply style
  */
-const Field = ({ placeholder, type, className, onChange, value }) => {
+const Field = ({ placeholder, type, className, onChange, value, onBlur }) => {
   return (
     <input
+      onBlur={onBlur}
       onChange={onChange}
       value={value}
       className={className}
@@ -32,7 +33,8 @@ Field.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
+  onBlur: PropTypes.func
 };
 
 export default Field;

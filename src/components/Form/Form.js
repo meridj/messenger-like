@@ -32,8 +32,10 @@ class Form extends React.Component {
     const currentValue = this.props.formMessageValue;
 
     evt.preventDefault();
-    this.props.changeMessageInputValue('');
-    this.props.sendMessage(currentValue);
+    if (this.props.formMessageValue.trim().length) {
+      this.props.changeMessageInputValue('');
+      this.props.sendMessage(currentValue);
+    }
   };
 
   render() {

@@ -6,6 +6,7 @@ import {
   RECEIVE_MESSAGE,
   CHANGE_MESSAGE_INPUT_VALUE,
   CHANGE_USERNAME_INPUT_VALUE,
+  SET_USERNAME_TO_INITIALSTATE,
   SEND_MESSAGE
 } from './types';
 
@@ -55,10 +56,17 @@ const changeUsernameInputValue = newValue => {
   };
 };
 
+const setUsernameToInitialState = () => {
+  return {
+    type: SET_USERNAME_TO_INITIALSTATE
+  };
+};
+
 export {
   connectToWebsocket,
   receiveMessage,
   changeMessageInputValue,
   changeUsernameInputValue,
+  setUsernameToInitialState,
   sendMessage
 };

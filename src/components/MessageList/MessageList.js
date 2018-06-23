@@ -11,13 +11,22 @@ import { Message } from '../';
 
 import './MessageList.styl';
 
-const MessageList = ({ messages }) => {
-  return (
-    <ul className="message-list">
-      {messages.map(message => <Message key={message.id} {...message} />)}
-    </ul>
-  );
-};
+class MessageList extends React.Component {
+  componentDidUpdate() {
+    console.log('messageList update', this.messageList);
+    this.messageList.scrollTop = this.messageList.scrollHeight;
+  }
+
+  render() {
+    const { messages } = this.props;
+
+    return (
+      <ul ref={ref => (this.messageList = ref)} className="message-list">
+        {messages.map(message => <Message key={message.id} {...message} />)}
+      </ul>
+    );
+  }
+}
 
 const mapStateToProps = ({ message }) => {
   return { messages: message };
