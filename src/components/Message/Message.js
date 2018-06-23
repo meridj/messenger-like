@@ -3,6 +3,7 @@
 */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 /*
 ** Local imports
@@ -14,12 +15,39 @@ import './Message.styl';
  *
  * @param {string} messageValue
  */
-const Message = ({ messageValue }) => (
-  <li className="message">{messageValue}</li>
-);
+const Message = ({ username, user: myUsername, messageValue }) => {
+  const isMe = myUsername === username;
+
+  const messageStyle = {
+    messageWrapper: {
+      alignSelf: isMe ? 'flex-end' : 'flex-start'
+    },
+    messageText: {
+      backgroundColor: isMe ? '#46B1C9' : '#84C0C6'
+    }
+  };
+
+  return (
+    <li style={messageStyle.messageWrapper} className="message">
+      <span className="message-username">{username}</span>
+      <span style={messageStyle.messageText} className="message-text">
+        {messageValue}
+      </span>
+    </li>
+  );
+};
 
 Message.propTypes = {
   messageValue: PropTypes.string.isRequired
 };
 
-export default Message;
+const mapStateToProps = ({ user }) => {
+  return {
+    user
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(Message);

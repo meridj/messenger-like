@@ -1,35 +1,40 @@
 /*
  * Require
  */
-var express = require('express');
-var Server = require('http').Server;
-var socket = require('socket.io');
+const express = require('express');
+const Server = require('http').Server;
+const socket = require('socket.io');
 
 /*
- * Vars
+ * consts
  */
-var app = express();
-var server = Server(app);
-var io = socket(server);
+const app = express();
+const server = Server(app);
+const io = socket(server);
 
 /*
  * Socket.io
  */
 let id = 0;
-io.on('connection', function(socket) {
-  // test
-  console.log('CONNECTED');
-  //io.emit('chat message', { id: id, messageValue: 'Wesh meridj!' });
 
-  socket.on('chat message', function(message) {
+io.on('connection', socket => {
+  console.log('USER CONNECTED');
+
+  socket.on('chat message', message => {
     message.id = ++id;
+    console.log('message : ', message);
+
     io.emit('chat message', message);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('USER DISCONNECTED');
   });
 });
 
 /*
  * Server
  */
-server.listen(3000, function() {
+server.listen(3000, () => {
   console.log('listening on *:3000');
 });

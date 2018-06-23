@@ -28,13 +28,17 @@ class ChatRoom extends React.Component {
     this.props.connectToWebsocket();
   }
 
+  componentWillUnmount() {
+    this.props.socket.disconnect();
+  }
+
   handleHoverOnButton = () => {
     this.setState({ isButtonHovered: !this.state.isButtonHovered });
   };
 
   render() {
     const { isButtonHovered } = this.state;
-
+    console.log(this.props);
     return (
       <div className="chat-room">
         <ButtonNavigation
@@ -53,7 +57,11 @@ class ChatRoom extends React.Component {
   }
 }
 
+const mapStateToProps = ({ socket }) => {
+  return { socket };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   actions
 )(ChatRoom);

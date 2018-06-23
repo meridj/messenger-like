@@ -5,6 +5,7 @@ import {
   WEBSOCKET_CONNECT,
   RECEIVE_MESSAGE,
   CHANGE_MESSAGE_INPUT_VALUE,
+  CHANGE_USERNAME_INPUT_VALUE,
   SEND_MESSAGE
 } from './types';
 
@@ -44,9 +45,20 @@ const sendMessage = value => {
   };
 };
 
+/**
+ * User actions
+ */
+const changeUsernameInputValue = newValue => {
+  return {
+    type: CHANGE_USERNAME_INPUT_VALUE,
+    value: newValue
+  };
+};
+
 export {
   connectToWebsocket,
   receiveMessage,
   changeMessageInputValue,
+  changeUsernameInputValue,
   sendMessage
 };

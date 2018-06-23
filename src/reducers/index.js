@@ -8,11 +8,15 @@ import { combineReducers } from 'redux';
  */
 import messageReducer from './messageReducer';
 import formMessageReducer from './formMessageReducer';
+import websocketReducer from './websocketReducer';
+import userReducer from './userReducer';
 
 /**
  * Code
  */
 export default combineReducers({
   formMessageValue: formMessageReducer,
-  message: messageReducer
+  socket: websocketReducer,
+  message: messageReducer,
+  user: userReducer
 });

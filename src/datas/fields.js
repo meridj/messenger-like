@@ -6,7 +6,6 @@ const fields = {
   },
   username: {
     type: 'text',
-    placeholder: 'Votre username',
     className: 'input-username'
   }
 };

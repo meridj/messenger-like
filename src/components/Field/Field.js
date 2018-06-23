@@ -28,8 +28,8 @@ const Field = ({ placeholder, type, className, onChange, value }) => {
 };
 
 Field.propTypes = {
-  placeholder: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
   className: PropTypes.string

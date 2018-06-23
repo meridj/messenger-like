@@ -18,32 +18,27 @@ import { WEBSOCKET_CONNECT, SEND_MESSAGE } from '../actions/types';
  * @param {object} action - Redux action
  */
 const socketMiddleware = store => next => action => {
-  let socket;
-
   switch (action.type) {
     case WEBSOCKET_CONNECT:
+      const newSocket = io('http://localhost:3000');
       const { dispatch } = store;
-      console.log('connect');
-      socket = io('http://localhost:3000');
-      socket.on('chat message', message => {
+
+      newSocket.on('chat message', message => {
         dispatch(receiveMessage(message));
       });
+      action.socket = newSocket;
       break;
     case SEND_MESSAGE:
+      const { socket, user } = store.getState();
       const message = {
-        username: 'Anonyme',
+        username: user,
         messageValue: action.messageValue
       };
 
-      console.log(action.type, action.messageValue);
-      console.log(socket);
-      socket = io('http://localhost:3000');
-
       socket.emit('chat message', message);
       break;
-    default:
-      next(action);
   }
+  next(action);
 };
 
 export default socketMiddleware;
