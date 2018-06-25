@@ -31,17 +31,14 @@ const socketMiddleware = store => next => action => {
   switch (action.type) {
     case WEBSOCKET_CONNECT:
       const { dispatch } = store;
-
+      console.log(store);
       socket = io('http://localhost:3000');
       socket.on('chat message', message => {
-        console.log(message.username);
-        console.log('newUsersIsWritting : ', usersIsWritting);
-        const newUsersIsWritting = usersIsWritting.filter(
-          username => username === message.username
-        );
-
         dispatch(receiveMessage(message));
-        dispatch(hasFinishedWritting(newUsersIsWritting));
+        const newUsersIsWritting = usersIsWritting.filter(
+          user => user !== message.username
+        );
+        store.dispatch(hasFinishedWritting(newUsersIsWritting));
       });
       socket.on('user is writting', user => {
         dispatch(userIsWritting(user));
@@ -49,9 +46,7 @@ const socketMiddleware = store => next => action => {
       action.socket = socket;
       break;
     case CHANGE_MESSAGE_INPUT_VALUE:
-      const isUserWritting = usersIsWritting.find(
-        currentUser => currentUser === user
-      );
+      const isUserWritting = usersIsWritting.includes(user);
 
       if (!isUserWritting) {
         socket.emit('user is writting', user);
@@ -63,6 +58,7 @@ const socketMiddleware = store => next => action => {
         messageValue: action.messageValue
       };
 
+      socket.on('chat message', message => {});
       socket.emit('chat message', message);
       break;
   }

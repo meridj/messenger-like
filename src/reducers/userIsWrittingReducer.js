@@ -14,7 +14,8 @@ const userIsWrittingReducer = (state = [], action) => {
     case USER_IS_WRITTING:
       return [...state, action.username];
     case HAS_FINISHED_WRITTING:
-      return action.users;
+      console.log(action.users);
+      return [...action.users];
     default:
       return state;
   }
