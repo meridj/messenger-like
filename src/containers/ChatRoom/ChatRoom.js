@@ -38,7 +38,7 @@ class ChatRoom extends React.Component {
 
   render() {
     const { isButtonHovered } = this.state;
-    console.log(this.props);
+
     return (
       <div className="chat-room">
         <ButtonNavigation

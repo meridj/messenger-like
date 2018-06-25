@@ -30,6 +30,10 @@ io.on('connection', socket => {
   socket.on('disconnect', () => {
     console.log('USER DISCONNECTED');
   });
+
+  socket.on('user is writting', user => {
+    io.emit('user is writting', user);
+  });
 });
 
 /*

@@ -2,6 +2,7 @@
 ** Npm imports
 */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 /*
@@ -11,11 +12,28 @@ import { Message } from '../';
 
 import './MessageList.styl';
 
+/**
+ * Class component
+ *
+ * @param {array} messages
+ */
 class MessageList extends React.Component {
-  componentDidUpdate() {
-    console.log('messageList update', this.messageList);
-    this.messageList.scrollTop = this.messageList.scrollHeight;
+  componentDidMount() {
+    this.scrollToBottom();
   }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom = () => {
+    setTimeout(() => {
+      this.messageList.scroll({
+        top: this.messageList.scrollHeight,
+        behavior: 'smooth'
+      });
+    }, 200);
+  };
 
   render() {
     const { messages } = this.props;
@@ -27,6 +45,10 @@ class MessageList extends React.Component {
     );
   }
 }
+
+MessageList.propTypes = {
+  messages: PropTypes.array.isRequired
+};
 
 const mapStateToProps = ({ message }) => {
   return { messages: message };

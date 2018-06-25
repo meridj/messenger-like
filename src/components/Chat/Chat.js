@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 /*
 ** Local imports
 */
-import { Form, Title, MessageList, Field } from '../';
+import { Form, Title, MessageList, Field, UserIsWriting } from '../';
 
 import { fields } from '../../datas/';
 
@@ -30,7 +30,7 @@ class Chat extends React.Component {
   };
 
   render() {
-    const { user } = this.props;
+    const { user, usersIsWritting } = this.props;
 
     return (
       <div className="chat">
@@ -44,16 +44,17 @@ class Chat extends React.Component {
           />
         </Title>
         <MessageList />
+        {usersIsWritting.length > 0 && (
+          <UserIsWriting myUsername={user} users={usersIsWritting} />
+        )}
         <Form className="form-message" fieldConfig={fields.message} />
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ user }) => {
-  return {
-    user
-  };
+const mapStateToProps = ({ user, usersIsWritting }) => {
+  return { user, usersIsWritting };
 };
 
 export default connect(

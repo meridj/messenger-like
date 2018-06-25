@@ -7,7 +7,9 @@ import {
   CHANGE_MESSAGE_INPUT_VALUE,
   CHANGE_USERNAME_INPUT_VALUE,
   SET_USERNAME_TO_INITIALSTATE,
-  SEND_MESSAGE
+  SEND_MESSAGE,
+  USER_IS_WRITTING,
+  HAS_FINISHED_WRITTING
 } from './types';
 
 /**
@@ -62,11 +64,27 @@ const setUsernameToInitialState = () => {
   };
 };
 
+const userIsWritting = username => {
+  return {
+    type: USER_IS_WRITTING,
+    username
+  };
+};
+
+const hasFinishedWritting = users => {
+  return {
+    type: HAS_FINISHED_WRITTING,
+    users
+  };
+};
+
 export {
   connectToWebsocket,
   receiveMessage,
   changeMessageInputValue,
   changeUsernameInputValue,
   setUsernameToInitialState,
-  sendMessage
+  sendMessage,
+  userIsWritting,
+  hasFinishedWritting
 };
